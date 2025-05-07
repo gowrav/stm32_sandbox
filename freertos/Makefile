@@ -6,11 +6,13 @@ BIN_IMAGE=$(BUILD_DIR)/firmware.bin
 #Output_Directory
 #======================================================================#
 #Toolchain
-TC_ROOT=/Users/gowrav/Work/gcc-arm-none-eabi-10-2020-q4-major
+TC_ROOT=./gcc-arm-none-eabi-10-2020-q4-major
 CC=$(TC_ROOT)/bin/arm-none-eabi-gcc
 OBJCOPY=$(TC_ROOT)/bin/arm-none-eabi-objcopy
 GDB=$(TC_ROOT)/bin/arm-none-eabi-gdb
-
+# CC=arm-none-eabi-gcc
+# OBJCOPY=arm-none-eabi-objcopy
+# GDB=arm-none-eabi-gdb
 #======================================================================#
 
 #Flags
@@ -90,7 +92,10 @@ SRC+=./Src/main.c
 clean_lib: 
 	rm -r -f -d .git/
 	rm -r -f -d ./lib/*.*
+	rm -r -f -d ./gcc-arm-none-eabi-10-2020-q4-major
 setup_lib: clean_lib
+	curl https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-mac.tar.bz2 --output ./gcc-arm-none-eabi-10-2020-q4-major-mac.tar.bz2
+	tar xjvf ./gcc-arm-none-eabi-10-2020-q4-major-mac.tar.bz2
 	git init
 	git submodule init
 	git submodule add https://github.com/FreeRTOS/FreeRTOS-Kernel lib/FreeRTOSV10.4.3LTSP3
